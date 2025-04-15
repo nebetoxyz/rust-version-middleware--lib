@@ -67,12 +67,12 @@ jobs:
         uses: nebetoxyz/setup-rust--action@v1.2.0
         with:
           cache: cargo
-      - id: lint-code
-        name: Lint code
+      - id: test-code
+        name: Test code
         run: cargo test
   check-package:
     runs-on: ubuntu-latest
-    name: Check package
+    name: Check Package
     needs: create-pull-request
     steps:
       - id: checkout-code

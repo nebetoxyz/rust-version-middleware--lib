@@ -85,4 +85,4 @@ jobs:
           cache: cargo
       - id: check-code
         name: Check code
-        run: cargo check --frozen
+        run: cargo check --locked

@@ -9,7 +9,6 @@ repository = "https://github.com/nebetoxyz/rust-version-middleware--lib"
 license-file = "LICENSE.md"
 keywords = ["middleware", "header", "x-version"]
 categories = ["middleware", "library"]
-links = "axum"
 exclude = [".github/", ".vscode/", ".gitignore"]
 
 [lib]

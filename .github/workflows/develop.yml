@@ -37,10 +37,13 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           assignees: ${{ github.actor }}
-  check-quality:
+  check:
     runs-on: ubuntu-latest
-    name: Check Quality
+    name: Check
     needs: create-pull-request
+    strategy:
+      matrix:
+        command: ["clippy", "test", "check --locked"]
     steps:
       - id: checkout-code
         name: Checkout code
@@ -51,38 +54,6 @@ jobs:
         with:
           cache: cargo
           components: clippy
-      - id: lint-code
-        name: Lint code
-        run: cargo clippy
-  check-testing:
-    runs-on: ubuntu-latest
-    name: Check Testing
-    needs: create-pull-request
-    steps:
-      - id: checkout-code
-        name: Checkout code
-        uses: actions/checkout@v4
-      - id: setup-rust
-        name: Setup Rust
-        uses: nebetoxyz/setup-rust--action@v1.2.0
-        with:
-          cache: cargo
-      - id: test-code
-        name: Test code
-        run: cargo test
-  check-package:
-    runs-on: ubuntu-latest
-    name: Check Package
-    needs: create-pull-request
-    steps:
-      - id: checkout-code
-        name: Checkout code
-        uses: actions/checkout@v4
-      - id: setup-rust
-        name: Setup Rust
-        uses: nebetoxyz/setup-rust--action@v1.2.0
-        with:
-          cache: cargo
       - id: check-code
-        name: Check code
-        run: cargo check --locked
+        name: Check code via "cargo ${{ matrix.command }}"
+        run: cargo ${{ matrix.command }}

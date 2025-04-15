@@ -44,6 +44,9 @@ jobs:
     strategy:
       matrix:
         command: ["clippy", "test", "check --locked"]
+        include:
+          - component: clippy
+            command: clippy
     steps:
       - id: checkout-code
         name: Checkout code
@@ -53,7 +56,7 @@ jobs:
         uses: nebetoxyz/setup-rust--action@v1.2.0
         with:
           cache: cargo
-          components: clippy
+          components: ${{ matrix.component }}
       - id: check-code
         name: Check code via "cargo ${{ matrix.command }}"
         run: cargo ${{ matrix.command }}

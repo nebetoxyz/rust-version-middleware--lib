@@ -46,4 +46,4 @@ jobs:
         run: cargo build --release --timings
       - id: publish-code
         name: Publish code on crates.io
-        run: cargo publish --dry-run
+        run: cargo publish

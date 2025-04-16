@@ -6,3 +6,5 @@ target/
 *.pdb
 
 *.profraw
+
+installer.sh

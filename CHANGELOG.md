@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.2](https://github.com/nebetoxyz/rust-version-middleware--lib/compare/v0.1.1...v0.1.2) (2025-04-16)
+
+
+### Bug Fixes
+
+* explicitly exclude installer ([65d0c39](https://github.com/nebetoxyz/rust-version-middleware--lib/commit/65d0c39e85c83441a06a54c001d96e03c506a451))
+
 ## [0.1.1](https://github.com/nebetoxyz/rust-version-middleware--lib/compare/v0.1.0...v0.1.1) (2025-04-16)
 
 

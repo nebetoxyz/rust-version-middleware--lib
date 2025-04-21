@@ -4,7 +4,8 @@ use axum::{
 };
 
 /// This is a custom extractor for Axum that extracts the version, via the `X-Version` request header.
-/// If the version is not present, it defaults to "latest".
+/// If the `X-Version` header is present, it returns it.
+/// If the `X-Version` header is not present, it defaults to `latest`.
 ///
 /// # Links
 ///
@@ -27,6 +28,7 @@ use axum::{
 ///
 /// let app = Router::<()>::new().route("/foo", get(handler));
 /// ```
+#[derive(Debug, Clone)]
 pub struct ExtractVersion(pub String);
 
 const HEADER_X_VERSION: &str = "x-version";
@@ -57,7 +59,7 @@ mod tests {
     use crate::ExtractVersion;
 
     #[tokio::test]
-    async fn test_lib_extract_version_with_header_one() {
+    async fn test_lib_extract_version_with_header_ok_one() {
         let request = Request::builder()
             .header("x-version", "v1.0.0")
             .body(Body::empty())
@@ -67,12 +69,14 @@ mod tests {
 
         let version = ExtractVersion::from_request_parts(&mut parts.0, &()).await;
 
-        assert!(version.is_ok());
-        assert_eq!(version.unwrap().0, "v1.0.0");
+        match version {
+            Ok(version) => assert_eq!(version.0, "v1.0.0"),
+            Err(_) => assert!(false, "Expected a valid version"),
+        }
     }
 
     #[tokio::test]
-    async fn test_lib_extract_version_with_header_two() {
+    async fn test_lib_extract_version_with_header_ok_two() {
         let request = Request::builder()
             .header("X-VersIon", " prevIew ")
             .body(Body::empty())
@@ -82,8 +86,10 @@ mod tests {
 
         let version = ExtractVersion::from_request_parts(&mut parts.0, &()).await;
 
-        assert!(version.is_ok());
-        assert_eq!(version.unwrap().0, "preview");
+        match version {
+            Ok(version) => assert_eq!(version.0, "preview"),
+            Err(_) => assert!(false, "Expected a valid version"),
+        }
     }
 
     #[tokio::test]
@@ -94,11 +100,9 @@ mod tests {
 
         let version = ExtractVersion::from_request_parts(&mut parts.0, &()).await;
 
-        assert!(version.is_ok());
-        assert_eq!(version.unwrap().0, "latest");
+        match version {
+            Ok(version) => assert_eq!(version.0, "latest"),
+            Err(_) => assert!(false, "Expected a valid version"),
+        }
     }
-}
-
-pub fn main() {
-    println!("Hello, world!");
 }

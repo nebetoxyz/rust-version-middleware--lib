@@ -1,6 +1,6 @@
 # Rust Axum Middleware - Extract Version from Header
 
-Custom extractor for [Rust](https://www.rust-lang.org/) [Axum](https://docs.rs/axum/latest/axum/) to extract the version from an HTTP header `x-version`.
+Custom extractor for [Rust](https://www.rust-lang.org/) [Axum](https://docs.rs/axum/latest/axum/) to extract the version from an HTTP header `X-Version`.
 Works **ONLY** with [Rust](https://www.rust-lang.org/) [Axum](https://docs.rs/axum/latest/axum/).
 
 ## Usage
@@ -10,7 +10,7 @@ use axum::{routing::get, Router};
 use version_middleware::ExtractVersion;
 
 async fn handler(ExtractVersion(version): ExtractVersion) {
-    println!("Version: {}", version);
+    println!("Version: {:?}", version);
 }
 
 let app = Router::<()>::new().route("/foo", get(handler));

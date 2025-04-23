@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.1](https://github.com/nebetoxyz/rust-version-middleware--lib/compare/v0.2.0...v0.2.1) (2025-04-23)
+
+
+### Bug Fixes
+
+* minor changes ([#7](https://github.com/nebetoxyz/rust-version-middleware--lib/issues/7)) ([12a0ea5](https://github.com/nebetoxyz/rust-version-middleware--lib/commit/12a0ea548f9669a15de7e69bb174965c051456bc))
+
 ## [0.2.0](https://github.com/nebetoxyz/rust-version-middleware--lib/compare/v0.1.2...v0.2.0) (2025-04-21)
 
 

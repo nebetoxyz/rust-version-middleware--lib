@@ -38,7 +38,7 @@ impl<S> FromRequestParts<S> for ExtractVersion
 where
     S: Send + Sync,
 {
-    type Rejection = (StatusCode, &'static str);
+    type Rejection = (StatusCode, String);
 
     async fn from_request_parts(parts: &mut Parts, _state: &S) -> Result<Self, Self::Rejection> {
         let version = parts.headers.get(HEADER_X_VERSION);
@@ -54,9 +54,8 @@ where
 
 #[cfg(test)]
 mod tests {
-    use axum::{body::Body, extract::FromRequestParts, http::Request};
-
     use crate::ExtractVersion;
+    use axum::{body::Body, extract::FromRequestParts, http::Request};
 
     #[tokio::test]
     async fn test_lib_extract_version_with_header_ok_one() {
@@ -71,7 +70,7 @@ mod tests {
 
         match version {
             Ok(version) => assert_eq!(version.0, "v1.0.0"),
-            Err(_) => assert!(false, "Expected a valid version"),
+            Err(err) => assert!(false, "Expected a valid version : {:?}", err),
         }
     }
 
@@ -88,7 +87,7 @@ mod tests {
 
         match version {
             Ok(version) => assert_eq!(version.0, "preview"),
-            Err(_) => assert!(false, "Expected a valid version"),
+            Err(err) => assert!(false, "Expected a valid version : {:?}", err),
         }
     }
 
@@ -102,7 +101,7 @@ mod tests {
 
         match version {
             Ok(version) => assert_eq!(version.0, "latest"),
-            Err(_) => assert!(false, "Expected a valid version"),
+            Err(err) => assert!(false, "Expected a valid version : {:?}", err),
         }
     }
 }

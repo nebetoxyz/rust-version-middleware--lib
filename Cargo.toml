@@ -3,11 +3,11 @@ name = "version_middleware"
 version = "0.2.0"
 authors = ["Nebeto <contact@nebeto.xyz>"]
 edition = "2024"
-description = "Custom extractor for Rust Axum to extract the version from an HTTP header `x-version`."
+description = "Custom extractor for Rust Axum to extract the version from an HTTP header X-Version."
 readme = "README.md"
 repository = "https://github.com/nebetoxyz/rust-version-middleware--lib"
 license-file = "LICENSE.md"
-keywords = ["middleware", "header", "x-version"]
+keywords = ["middleware", "header"]
 categories = ["web-programming"]
 exclude = [".github/", ".vscode/", ".gitignore"]
 

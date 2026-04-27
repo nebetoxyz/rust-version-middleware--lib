@@ -20,5 +20,5 @@ doc = true
 crate-type = ["lib"]
 
 [dependencies]
-axum = "0.8.1"
-tokio = "1.44.1"
+axum = "0.8.9"
+tokio = "1.52.1"
